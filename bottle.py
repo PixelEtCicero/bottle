@@ -102,10 +102,11 @@ json_loads = lambda s: json_lds(touni(s))
 callable = lambda x: hasattr(x, '__call__')
 
 def _wsgi_recode(src):
-    """ Translate a PEP-3333 latin1-string to utf8+surrogateescape """
+    # """ Translate a PEP-3333 latin1-string to utf8+surrogateescape """
     # if src.isascii():
     #     return src
     # return src.encode('latin1').decode('utf8', 'surrogateescape')
+    """ The code above fails when passing utf8 url between www and api service """
     try:
         return src.encode('latin1').decode('utf8')
     except:
