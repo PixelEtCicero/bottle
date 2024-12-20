@@ -103,9 +103,13 @@ callable = lambda x: hasattr(x, '__call__')
 
 def _wsgi_recode(src):
     """ Translate a PEP-3333 latin1-string to utf8+surrogateescape """
-    if src.isascii():
+    # if src.isascii():
+    #     return src
+    # return src.encode('latin1').decode('utf8', 'surrogateescape')
+    try:
+        return src.encode('latin1').decode('utf8')
+    except:
         return src
-    return src.encode('latin1').decode('utf8', 'surrogateescape')
 
 
 def _raise(*a):
